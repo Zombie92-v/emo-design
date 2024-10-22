@@ -12,7 +12,7 @@ title = "小黑喵日常"
 firstWord = "喵喵"
 guidanceWord = "没有粮食了 喵~"
 thinkWord = "感谢大人 打赏~"
-def general(path: str, dir="target", title: str=None, firstWord: str=None,guidanceWord:str=None,thinkWord:str=None,imgList=None):
+def general(path: str=None, dir="target", title: str="搞笑日常", firstWord: str="",guidanceWord:str="家中无存粮",thinkWord:str="感谢大人 打赏~",imgList=None,font_path=None):
     # files 就是所有文件的绝对路径列表，不包括目录
     if(imgList==None):
         imgList = [os.path.abspath(os.path.join(path, f)) for f in os.listdir(path) if
@@ -34,7 +34,7 @@ def general(path: str, dir="target", title: str=None, firstWord: str=None,guidan
     # 生成banner JPG 或 PNG 格式，750*400 像素。
     bannerPath = os.path.join(target_dir, "banner.png")
     bannerPath = generalBannerImg(image_paths=emoList[0:3], output_path=bannerPath, title=title, font_size=40,
-                                  font_path="font/鼠标仿手写体.ttf")
+                                  font_path=font_path)
     # 格式设置
     bannerPath = emo.process_image(bannerPath, (750, 400), 500, bannerPath)
     print(f'横幅生成：{bannerPath}')
@@ -42,7 +42,7 @@ def general(path: str, dir="target", title: str=None, firstWord: str=None,guidan
     # 封面 PNG 格式，240*240像素。
     firstImg = os.path.join(target_dir, "封面.png")
     firstImg = generalBannerImg(image_paths=emoList[0:-1], output_path=firstImg, title=firstWord, font_size=40,
-                                font_path="font/鼠标仿手写体.ttf")
+                                font_path=font_path)
     # 格式设置
     firstImg = emo.process_image(firstImg, (240, 240), 500, firstImg)
     firstImg = make_image_transparent(firstImg,firstImg)
@@ -50,7 +50,7 @@ def general(path: str, dir="target", title: str=None, firstWord: str=None,guidan
     # 生成图标 PNG 格式，50*50像素。
     icon = os.path.join(target_dir, "图标.png")
     icon = generalBannerImg(image_paths=emoList[0:1], output_path=icon, title=None, font_size=40,
-                            font_path="font/鼠标仿手写体.ttf")
+                            font_path=font_path)
     # 格式设置
     icon = emo.process_image(icon, (50, 50), 500, icon)
     icon = make_image_transparent(icon,icon)
@@ -59,14 +59,14 @@ def general(path: str, dir="target", title: str=None, firstWord: str=None,guidan
     # 赞赏引导图 750*560 像素（图片上传后将被压缩至500KB以下才可提交）。
     guidance = os.path.join(target_dir, "引导图.png")
     guidance = generalBannerImg(image_paths=emoList[3:6], output_path=guidance, title=guidanceWord, font_size=40,
-                                  font_path="font/鼠标仿手写体.ttf")
+                                  font_path=font_path)
     # 格式设置
     guidance = emo.process_image(guidance, (750, 560), 500, guidance)
     print(f'引导图生成：{guidance}')
     # 赞赏致谢图 JPG、PNG 或 GIF格式，750*750像素。
     think = os.path.join(target_dir, "致谢图.png")
     think = generalBannerImg(image_paths=emoList[6:7], output_path=think, title=thinkWord, font_size=20,
-                                  font_path="font/鼠标仿手写体.ttf")
+                                  font_path=font_path)
     # 格式设置
     think = emo.process_image(think, (750, 750), 500, think)
     print(f'致谢图生成：{think}')
